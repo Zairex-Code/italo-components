@@ -3,7 +3,6 @@ include('../connection/bd.php');
 
 class inventoryManager{
     private $id;
-    private $image;
     private $name;
     private $category;
     private $price;
@@ -67,7 +66,7 @@ class inventoryManager{
 
     }
     */
-    public function saveButton($id, $image,$name, $category, $price, $stock, $modifyAction , $pdo){
+    public function saveButton($id, $name, $category, $price, $stock, $modifyAction , $pdo){
         $product = [
             'id'       => $id,
             'name'     => $name,
@@ -98,5 +97,9 @@ class inventoryManager{
             echo "product added successfully...";
 
         };
+    }
+
+    public function editButton(){
+        
     }
 };
