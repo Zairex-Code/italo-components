@@ -1,3 +1,7 @@
+<?php
+include('../controllers/inventoryController.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +31,7 @@
                 <span class="font-semibold uppercase tracking-wider text-xs">Nuevos Productos</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <form action="" id="product-form" method="post" class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Preview Placeholder -->
                 <div class="md:col-span-1">
                     <div class="aspect-video bg-gray-100 rounded-2xl relative overflow-hidden flex items-center justify-center border-2 border-dashed border-gray-200">
@@ -38,58 +42,58 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Form Fields -->
                 <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 items-end">
+                    <input type="hidden" name="id" id="id">
+                    
                     <div class="col-span-1 sm:col-span-2">
                         <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Nombre del Producto</label>
-                        <input type="text" placeholder="Ej: Mármol Carrara Premium" class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
+                        <input type="text" placeholder="Ej: Mármol Carrara Premium" name="name" value="<?php echo $name ?>" class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Categoría</label>
-                        <select class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 appearance-none">
-                            <option>Revestimientos</option>
-                            <option>Mobiliario</option>
-                            <option>Iluminación</option>
+                        <select class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 appearance-none" name="category">
+                            <option <?php echo ($categories == 'Revestimientos') ? 'selected' : '' ?>>Revestimientos</option>
+                            <option <?php echo ($categories == 'Mobiliario') ? 'selected' : '' ?>>Mobiliario</option>
+                            <option <?php echo ($categories == 'Iluminación') ? 'selected' : '' ?>>Iluminación</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Precio</label>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 text-sm">$</span>
-                            <input type="number" placeholder="0.00" class="w-full bg-gray-100 border-none rounded-lg pl-8 pr-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
+                            <input type="number" step="0.01" value="<?php echo $price ?>" name="price" placeholder="0.00" class="w-full bg-gray-100 border-none rounded-lg pl-8 pr-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
                         </div>
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Stock Inicial</label>
-                        <input type="number" placeholder="0" class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
+                        <input type="number" value="<?php echo $stock ?>" placeholder="0" name="stock" class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
                     </div>
                     <div class="flex flex-col gap-2">
-                        <button class="bg-[#111827] text-white px-8 py-2.5 rounded-lg text-sm font-semibold hover:bg-black transition w-full">Guardar en Catálogo</button>
-                        <button class="bg-gray-200 text-gray-600 px-8 py-2.5 rounded-lg text-sm font-semibold hover:bg-gray-300 transition w-full">Limpiar</button>
+                        <button type="submit" name="saveAction"  class="bg-[#111827] text-white px-8 py-2.5 rounded-lg text-sm font-semibold hover:bg-black transition w-full">Guardar en Catálogo</button>
+                        <button type="reset" class="bg-gray-200 text-gray-600 px-8 py-2.5 rounded-lg text-sm font-semibold hover:bg-gray-300 transition w-full">Limpiar</button>
                     </div>
                 </div>
-            </div>
-
+            </form>
         </div>
-
-        <!-- Product List -->
-            <div>
-                <div class="flex justify-between items-end mb-6">
+                <!-- Product List -->
                     <div>
-                        <h2 class="text-2xl font-serif text-gray-900 mb-1">Listado de Artículos</h2>
-                        <p class="text-sm text-gray-400">Auditoría completa de existencias en tiempo real.</p>
-                    </div>
-                    <div class="flex items-center gap-4 ">
-                        <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
-                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                            </span>
-                            <input type="text" placeholder="Buscar productos..." class=" w-100 pl-10  pr-4 py-2 bg-white border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 w-64 shadow-sm text-sm">
+                        <div class="flex justify-between items-end mb-6">
+                            <div>
+                                <h2 class="text-2xl font-serif text-gray-900 mb-1">Listado de Artículos</h2>
+                                <p class="text-sm text-gray-400">Auditoría completa de existencias en tiempo real.</p>
+                            </div>
+                            <div class="flex items-center gap-4 ">
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                                    </span>
+                                    <input type="text" placeholder="Buscar productos..." class=" w-100 pl-10  pr-4 py-2 bg-white border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 w-64 shadow-sm text-sm">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>  
+                    </div>  
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <table class="w-full text-left">
                     <thead>
@@ -103,26 +107,34 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-50">
-                        <!-- Row 1 -->
-                        <tr class="hover:bg-gray-50/50 transition">
-                            <td class=" py-4 text-xs text-center"><span class="bg-gray-50 text-gray-400 px-2 py-1 rounded-full border border-gray-100">1</span></td>
-                            <td class="px-8 py-4">
-                                <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?q=80&w=100&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover shadow-sm bg-gray-100" alt="img">
-                            </td>
-                            <td class="px-8 py-4">
-                                <div class="font-serif text-gray-900 leading-tight">Lámpara Cobre 'Vero'</div>
-                                <div class="text-[10px] text-gray-400">Iluminación</div>
-                            </td>
-                            <td class="px-8 py-4"><span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-orange-100">14 Unid.</span></td>
-                            <td class="px-8 py-4 font-bold">$350.00</td>
-                            <td class="px-8 py-4">
-                                <div class="flex justify-end gap-3 text-gray-300">
-                                    <button class="hover:text-cyan-500"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg></button>
-                                    <button class="hover:text-red-500"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button>
-                                </div>
-                            </td>
-                        </tr>
-                        
+                        <?php 
+                        foreach($productsList as $product){?>
+
+                            <tr class="hover:bg-gray-50/50 transition">
+                                <td class=" py-4 text-xs text-center"><span class="bg-gray-50 text-gray-400 px-2 py-1 rounded-full border border-gray-100"><?php echo $product['id'] ?></span></td>
+                                <td class="px-8 py-4">
+                                    <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?q=80&w=100&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover shadow-sm bg-gray-100" alt="img">
+                                </td>
+                                <td class="px-8 py-4">
+                                    <div class="font-serif text-gray-900 leading-tight"><?php echo $product['name'] ?></div>
+                                    <div class="text-[10px] text-gray-400"><?php echo $product['category'] ?></div>
+                                </td>
+                                <td class="px-8 py-4"><span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-orange-100">14 Unid.</span></td>
+                                <td class="px-8 py-4 font-bold"><?php echo $product['price'] ?></td>
+                                <td class="px-8 py-4">
+                                    <div class="flex justify-end gap-3 text-gray-300">
+                                        <button class="hover:text-cyan-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                                        </button>
+                                        <button class="hover:text-red-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg></button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        <?php } ?>
+
                     </tbody>
                 </table>
                 
