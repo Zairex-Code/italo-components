@@ -161,7 +161,7 @@ include('../controllers/inventoryController.php');
         document.querySelector('input[name="price"]').value = product.price;
         document.querySelector('input[name="stock"]').value = product.stock;
         
-        // Scroll suave hacia el formulario
+        // we de an smooth scroll to the top of the page to show the form
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -184,17 +184,19 @@ include('../controllers/inventoryController.php');
             buttonsStyling: false
         }).then((result) => {
             if (result.isConfirmed) {
-                // Dejamos de lado el AJAX complejo y navegamos a la URL como PHP clásico
+                // we redirect the url to the handleRequest() in the php file
                 window.location.href = `?deleteId=${product.id}`;
             }
         });
     }
 
-    // Cuando la página cargue, leemos si la URL tiene "?status=deleted" de PHP
+    // When the windows is loaded, we reed if URL has "?status=deleted" from PHP
     window.onload = function() {
+        //returns the entire URL of the current page as a string
         const params = new URLSearchParams(window.location.search);
+        console.log(params);
         if(params.get('status') === 'deleted') {
-            // Mostramos la alerta de éxito
+            //Show a success alert
             Swal.fire({
                 title: '¡Eliminado!',
                 text: 'El producto fue borrado con éxito.',
@@ -204,10 +206,9 @@ include('../controllers/inventoryController.php');
                 showConfirmButton: false,
                 timer: 3000
             });
-            // Limpiamos la URL visualmente para que la alerta no se vuelva a mostrar si actualiza la página con F5
+            // uptade the page with a new url, this method have to use ({object}, title usuals is ignored by browsers, new url(this is our base URL view/inventory.php))
             window.history.replaceState({}, document.title, window.location.pathname);
         }
     };
 </script>
-
 </html>

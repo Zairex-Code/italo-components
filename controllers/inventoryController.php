@@ -33,11 +33,11 @@ class inventoryManager{
 
 
     public function handleRequest(){
-        // 1. Eliminar producto mediante URL (PHP Puro)
+        // 1. we get the deleteId
         if(isset($_GET['deleteId'])){
             $this->deleteProduct($_GET['deleteId']);
             
-            // Redirige limpiando el ID de la URL y mandando una señal de éxito
+            // we redirect to a new address (inventory) but inside we have a new query status....
             header("Location: inventory.php?status=deleted");
             exit; 
         }
@@ -78,9 +78,9 @@ class inventoryManager{
     }
 
     private function deleteProduct($id){
-        $editSQL = $this->pdo->prepare("DELETE FROM inventory WHERE id = :id");
-        $editSQL->bindParam(':id', $id);
-        $editSQL->execute();
+        $deleteSQL = $this->pdo->prepare("DELETE FROM inventory WHERE id = :id");
+        $deleteSQL->bindParam(':id', $id);
+        $deleteSQL->execute();
     }
     
     private function clearForm(){
