@@ -15,7 +15,7 @@ if ($env) {
 
 try{
     $pdo = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASSWORD);
-    echo "Connected successfully";
+    
 }catch(PDOException $e){
     echo "something wrong :(".$e->getMessage();
 }

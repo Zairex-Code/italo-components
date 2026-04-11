@@ -33,8 +33,16 @@ class inventoryManager{
 
 
     public function handleRequest(){
+        // 1. Eliminar producto mediante URL (PHP Puro)
+        if(isset($_GET['deleteId'])){
+            $this->deleteProduct($_GET['deleteId']);
+            
+            // Redirige limpiando el ID de la URL y mandando una señal de éxito
+            header("Location: inventory.php?status=deleted");
+            exit; 
+        }
 
-        // Handle Form Submit from POST request
+        // 2. Insertar o Actualizar desde formulario POST
         if(isset($this->saveAction)){
             if(empty($this->id)){
                 $this->createProduct();
@@ -53,7 +61,7 @@ class inventoryManager{
             $addSQL->execute();
 
             $this->clearForm();
-            echo "product added successfully...";
+            //echo "product added successfully...";
     }
 
     private function updateProduct(){
@@ -66,7 +74,13 @@ class inventoryManager{
             $editSQL->execute();
 
             $this->clearForm();
-            echo "product modified successfully...";
+            //echo "product modified successfully...";
+    }
+
+    private function deleteProduct($id){
+        $editSQL = $this->pdo->prepare("DELETE FROM inventory WHERE id = :id");
+        $editSQL->bindParam(':id', $id);
+        $editSQL->execute();
     }
     
     private function clearForm(){
