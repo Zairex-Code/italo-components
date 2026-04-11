@@ -55,6 +55,7 @@ include('../controllers/inventoryController.php');
                     <div>
                         <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Categoría</label>
                         <select class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 appearance-none" name="category" value="<?php echo $category ?>">
+                            <option value="" disabled selected>Selecciona una categoría</option>
                             <option <?php echo ($categories == 'Revestimientos') ? 'selected' : '' ?>>Revestimientos</option>
                             <option <?php echo ($categories == 'Mobiliario') ? 'selected' : '' ?>>Mobiliario</option>
                             <option <?php echo ($categories == 'Iluminación') ? 'selected' : '' ?>>Iluminación</option>

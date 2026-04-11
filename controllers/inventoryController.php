@@ -1,6 +1,12 @@
 <?php
 include_once('../connection/bd.php');
 
+// we bring env
+$env = parse_ini_file(__DIR__ . '/../.env');
+// API ENV
+$API_URL = $env['API_URL'];
+$API_KEY = $env['API_KEY'];
+$API_HOST = $env['API_HOST'];
 
 class inventoryManager{
     private $pdo;
