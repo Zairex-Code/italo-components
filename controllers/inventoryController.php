@@ -21,7 +21,7 @@ class inventoryManager{
         $this->category = (isset($_POST['category'])) ? $_POST['category'] : "";
         $this->price = (isset($_POST['price'])) ? $_POST['price'] : "";
         $this->stock = (isset($_POST['stock'])) ? $_POST['stock'] : "";
-        $this->saveAction = (isset($_POST['stock'])) ? $_POST['stock'] : NULL;
+        $this->saveAction = (isset($_POST['saveAction'])) ? $_POST['saveAction'] : NULL;
     }
 
     // Getters 
@@ -33,8 +33,9 @@ class inventoryManager{
 
 
     public function handleRequest(){
-        if(isset($this->saveAction)){
 
+        // Handle Form Submit from POST request
+        if(isset($this->saveAction)){
             if(empty($this->id)){
                 $this->createProduct();
             }else{
@@ -91,6 +92,7 @@ $controller->handleRequest();
 
 
 $productList = $controller->getAllProducts();
+
 
 
 $id = $controller->getId();

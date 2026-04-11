@@ -45,7 +45,7 @@ include('../controllers/inventoryController.php');
                 
                 <!-- Form Fields -->
                 <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 items-end">
-                    <input type="hidden" name="id" id="id">
+                    <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
                     
                     <div class="col-span-1 sm:col-span-2">
                         <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Nombre del Producto</label>
@@ -53,14 +53,14 @@ include('../controllers/inventoryController.php');
                     </div>
                     <div>
                         <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Categoría</label>
-                        <select class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 appearance-none" name="category">
+                        <select class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 appearance-none" name="category" value="<?php echo $category ?>">
                             <option <?php echo ($categories == 'Revestimientos') ? 'selected' : '' ?>>Revestimientos</option>
                             <option <?php echo ($categories == 'Mobiliario') ? 'selected' : '' ?>>Mobiliario</option>
                             <option <?php echo ($categories == 'Iluminación') ? 'selected' : '' ?>>Iluminación</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Precio</label>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest" >Precio</label>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 text-sm">$</span>
                             <input type="number" step="0.01" value="<?php echo $price ?>" name="price" placeholder="0.00" class="w-full bg-gray-100 border-none rounded-lg pl-8 pr-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
@@ -108,7 +108,7 @@ include('../controllers/inventoryController.php');
                     </thead>
                     <tbody class="divide-y divide-gray-50">
                         <?php 
-                        foreach($productsList as $product){?>
+                        foreach($productList as $product){?>
 
                             <tr class="hover:bg-gray-50/50 transition">
                                 <td class=" py-4 text-xs text-center"><span class="bg-gray-50 text-gray-400 px-2 py-1 rounded-full border border-gray-100"><?php echo $product['id'] ?></span></td>
@@ -119,11 +119,11 @@ include('../controllers/inventoryController.php');
                                     <div class="font-serif text-gray-900 leading-tight"><?php echo $product['name'] ?></div>
                                     <div class="text-[10px] text-gray-400"><?php echo $product['category'] ?></div>
                                 </td>
-                                <td class="px-8 py-4"><span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-orange-100">14 Unid.</span></td>
+                                <td class="px-8 py-4"><span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-orange-100"><?php echo $product['stock'] ?> Unid.</span></td>
                                 <td class="px-8 py-4 font-bold"><?php echo $product['price'] ?></td>
                                 <td class="px-8 py-4">
                                     <div class="flex justify-end gap-3 text-gray-300">
-                                        <button class="hover:text-cyan-500">
+                                        <button class="hover:text-cyan-500 cursor-pointer" onclick="editProduct(<?php echo htmlspecialchars(json_encode($product)); ?>)">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
                                         </button>
                                         <button class="hover:text-red-500">
@@ -152,4 +152,17 @@ include('../controllers/inventoryController.php');
         </div>
     </main>
 </body>
+<script>
+    function editProduct(product) {
+        document.querySelector('input[name="id"]').value = product.id;
+        document.querySelector('input[name="name"]').value = product.name;
+        document.querySelector('select[name="category"]').value = product.category;
+        document.querySelector('input[name="price"]').value = product.price;
+        document.querySelector('input[name="stock"]').value = product.stock;
+        
+        // Scroll suave hacia el formulario
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+</script>
+
 </html>
