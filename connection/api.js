@@ -1,10 +1,11 @@
 
 const inputName =document.querySelector('input[name="name"]');
 const imageSection = document.getElementById('image');
+const inputImage = document.querySelector('input[name="image"]');
 const inputCategory = document.querySelector('input[name="category"]');
 const inputPrice = document.querySelector('input[name="price"]');
 const inputStock = document.querySelector('input[name="stock"]');
-
+const tableImage = document.getElementById('table-image');
 const amazonResults = document.getElementById('amazon-results');
 const searchLoader = document.getElementById('search-loader');
 
@@ -92,7 +93,7 @@ inputName.addEventListener('input', (e) => {
 					item.onclick = (event) => {
 						event.stopPropagation();
 						inputName.value = title;
-						
+						inputImage.value = image;
 						
 						imageSection.src = image;
 						// if price is a string we remove any symbol and we convert it to a number, if it's already a number we just set it

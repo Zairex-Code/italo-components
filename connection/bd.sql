@@ -5,6 +5,7 @@ USE italo_components;
 CREATE TABLE inventory (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    image VARCHAR(255),
     category varchar(100) NOT null,
     price DECIMAL(10,2) NOT NULL,
     stock INT DEFAULT 0

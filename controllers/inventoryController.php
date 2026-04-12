@@ -1,12 +1,11 @@
 <?php
 include_once('../connection/bd.php');
 
-            
 
 class inventoryManager{
     private $pdo;
     private $id;
-    
+    private $image;
     private $name;
     private $category;
     private $price;
@@ -19,7 +18,7 @@ class inventoryManager{
     {
         $this->pdo = $pdo;
         $this->id = (isset($_POST['id'])) ? $_POST['id'] : "";
-        
+        $this->image = (isset($_POST['image'])) ? $_POST['image'] : "";
         $this->name = (isset($_POST['name'])) ? $_POST['name'] : "";
         $this->category = (isset($_POST['category'])) ? $_POST['category'] : "";
         $this->price = (isset($_POST['price'])) ? $_POST['price'] : "";
@@ -30,6 +29,7 @@ class inventoryManager{
     // Getters 
     public function getId(){return $this-> id;}
     public function getName(){return $this->name;}
+    public function getImage(){return $this->image;}
     public function getCategory(){return $this->category;}
     public function getPrice(){return $this->price;}
     public function getStock(){return $this->stock;}
@@ -52,12 +52,16 @@ class inventoryManager{
             }else{
                 $this->updateProduct();
             }
+            // Implementamos patrón PRG (Post/Redirect/Get) para evitar reenvío de formularios
+            header("Location: inventory.php?status=saved");
+            exit;
         }
     }
 
     private function createProduct(){
-            $addSQL =$this->pdo->prepare("INSERT INTO inventory (name, category, price, stock) VALUES(:name, :category, :price, :stock)");
+            $addSQL =$this->pdo->prepare("INSERT INTO inventory (name, image,category, price, stock) VALUES(:name, :image, :category, :price, :stock)");
             $addSQL->bindParam(':name', $this->name);
+            $addSQL->bindParam(':image', $this->image);
             $addSQL->bindParam(':category', $this->category);
             $addSQL->bindParam(':price', $this->price);
             $addSQL->bindParam(':stock', $this->stock);
@@ -68,8 +72,9 @@ class inventoryManager{
     }
 
     private function updateProduct(){
-            $editSQL = $this->pdo->prepare("UPDATE inventory SET name = :name, category = :category, price = :price, stock = :stock WHERE id = :id");
+            $editSQL = $this->pdo->prepare("UPDATE inventory SET name = :name, image = :image, category = :category, price = :price, stock = :stock WHERE id = :id");
             $editSQL->bindParam(':id', $this->id);
+            $editSQL->bindParam(':image', $this->image);
             $editSQL->bindParam(':name', $this->name);
             $editSQL->bindParam(':category', $this->category);
             $editSQL->bindParam(':price', $this->price);
@@ -89,6 +94,7 @@ class inventoryManager{
     private function clearForm(){
         $this->id="";
         $this->name = "";
+        $this->image = "";
         $this->category = "";
         $this->price = "";
         $this->stock = "";
@@ -128,6 +134,7 @@ $categoryList = $controller->getCategoriesList();
 
 
 $id = $controller->getId();
+$image = $controller->getImage();
 $name = $controller->getName();
 $category = $controller->getCategory();
 $price = $controller->getPrice();

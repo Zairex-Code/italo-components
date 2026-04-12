@@ -43,6 +43,7 @@ include('../controllers/inventoryController.php');
                 <!-- Form Fields -->
                 <div class="md:col-span-2 flex flex-col justify-between gap-6">
                     <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
+                    <input type="hidden" name="image" id="input-image" value="<?php echo $image ?>" >
                     
                     <!-- Fila 1: Nombre (Ocupa todo el ancho) -->
                     <div class="relative w-full">
@@ -122,12 +123,12 @@ include('../controllers/inventoryController.php');
                         <?php 
                         foreach($productList as $product){?>
 
-                            <tr id="product-row-<?php echo $product['id']; ?>" class="hover:bg-gray-50/50 transition">
+                            <tr id="<?php echo $product['id']; ?>" class="hover:bg-gray-50/50 transition">
                                 <td class=" py-4 text-xs text-center"><span class="bg-gray-50 text-gray-400 px-2 py-1 rounded-full border border-gray-100"><?php echo $product['id'] ?></span></td>
                                 <td class="px-8 py-4">
-                                    <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?q=80&w=100&auto=format&fit=crop" class="w-12 h-12 rounded-xl object-cover shadow-sm bg-gray-100" alt="img">
+                                    <img src="<?php echo $product['image']; ?>" class="h-10 w-10 object-cover rounded-lg shadow-sm" alt="img">
                                 </td>
-                                <td class="px-8 py-4">
+                                <td class="px-8 py-4 w-200">
                                     <div class="font-serif text-gray-900 leading-tight"><?php echo $product['name'] ?></div>
                                     <div class="text-[10px] text-gray-400"><?php echo $product['category'] ?></div>
                                 </td>
@@ -152,13 +153,8 @@ include('../controllers/inventoryController.php');
                 
                 <!-- Pagination Footer -->
                 <div class="px-8 py-6 bg-gray-50/50 flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase tracking-widest border-t border-gray-100">
-                    <div>Mostrando 3 de 128 productos</div>
-                    <div class="flex items-center gap-2">
-                        <button class="p-1 px-2 border border-gray-200 rounded hover:bg-white"><</button>
-                        <button class="p-1 px-3 bg-cyan-700 text-white rounded">1</button>
-                        <button class="p-1 px-3 border border-gray-200 rounded hover:bg-white">2</button>
-                        <button class="p-1 px-2 border border-gray-200 rounded hover:bg-white">></button>
-                    </div>
+                    <div>Mostrando <?php echo count($productList); ?> productos</div>
+                    
                 </div>
             </div>
         </div>
@@ -169,6 +165,7 @@ include('../controllers/inventoryController.php');
     function editProduct(product) {
         document.querySelector('input[name="id"]').value = product.id;
         document.querySelector('input[name="name"]').value = product.name;
+        document.getElementById('image').src = product.image;
         document.querySelector('select[name="category"]').value = product.category;
         document.querySelector('input[name="price"]').value = product.price;
         document.querySelector('input[name="stock"]').value = product.stock;
@@ -246,6 +243,17 @@ include('../controllers/inventoryController.php');
                 timer: 3000
             });
             // uptade the page with a new url, this method have to use ({object}, title usuals is ignored by browsers, new url(this is our base URL view/inventory.php))
+            window.history.replaceState({}, document.title, window.location.pathname);
+        } else if(params.get('status') === 'saved') {
+            Swal.fire({
+                title: '¡Guardado!',
+                text: 'El producto se guardó correctamente en el catálogo.',
+                icon: 'success',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
             window.history.replaceState({}, document.title, window.location.pathname);
         }
     };
