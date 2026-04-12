@@ -35,46 +35,56 @@ include('../controllers/inventoryController.php');
             <form action="" id="product-form" method="post" class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Preview Placeholder -->
                 <div class="md:col-span-1">
-                    <div class="aspect-video bg-gray-100 rounded-2xl relative overflow-hidden flex items-center justify-center border-2 border-dashed border-gray-200">
-                        <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-80" alt="Preview">
-                        <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/60 to-transparent">
-                            <span class="bg-yellow-400 text-[10px] font-bold px-2 py-0.5 rounded text-black mb-2 inline-block">PREVIEW</span>
-                            <h3 class="text-white font-serif text-xl">Mármol Carrara Premium</h3>
-                        </div>
+                    <div class="w-full h-100 bg-gray-100 rounded-2xl relative overflow-hidden flex items-center justify-center border-2 border-dashed border-gray-200">
+                        <img id="image" src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1000&auto=format&fit=crop" class="max-w-full max-h-full object-contain block opacity-80" alt="Preview">
                     </div>
                 </div>
                 
                 <!-- Form Fields -->
-                <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 items-end">
+                <div class="md:col-span-2 flex flex-col justify-between gap-6">
                     <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
                     
-                    <div class="col-span-1 sm:col-span-2">
+                    <!-- Fila 1: Nombre (Ocupa todo el ancho) -->
+                    <div class="relative w-full">
                         <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Nombre del Producto</label>
-                        <input type="text" placeholder="Ej: Mármol Carrara Premium" name="name" value="<?php echo $name ?>" class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Categoría</label>
-                        <select class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 appearance-none" name="category" value="<?php echo $category ?>">
-                            <option value="" disabled selected>Selecciona una categoría</option>
-                            <option <?php echo ($categories == 'Revestimientos') ? 'selected' : '' ?>>Revestimientos</option>
-                            <option <?php echo ($categories == 'Mobiliario') ? 'selected' : '' ?>>Mobiliario</option>
-                            <option <?php echo ($categories == 'Iluminación') ? 'selected' : '' ?>>Iluminación</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest" >Precio</label>
                         <div class="relative">
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 text-sm">$</span>
-                            <input type="number" step="0.01" value="<?php echo $price ?>" name="price" placeholder="0.00" class="w-full bg-gray-100 border-none rounded-lg pl-8 pr-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
+                            <input id="product-name" type="text" placeholder="Ej: iPhone 15 Pro Max" name="name" value="<?php echo $name ?>" class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 pr-10">
+                            <!-- Loader posicionado dentro del input -->
+                            <div id="search-loader" class="hidden absolute inset-y-0 right-0 flex items-center pr-3">
+                                <svg class="animate-spin h-5 w-5 text-cyan-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            </div>
+                        </div>
+                        <!-- Dropdown de sugerencias -->
+                        <div id="amazon-results" class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-2xl max-h-64 overflow-y-auto divide-y divide-gray-100 top-full"></div>
+                    </div>
+
+                    <!-- Fila 2: Categoría, Precio, Stock -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Categoría</label>
+                            <select class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 appearance-none" name="category">
+                                <!-- JS llenará esto -->
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Precio</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 text-sm">$</span>
+                                <input type="number" step="0.01" value="<?php echo $price ?>" name="price" placeholder="0.00" class="w-full bg-gray-100 border-none rounded-lg pl-8 pr-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Stock Inicial</label>
+                            <input type="number" value="<?php echo $stock ?>" placeholder="0" name="stock" class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Stock Inicial</label>
-                        <input type="number" value="<?php echo $stock ?>" placeholder="0" name="stock" class="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500">
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <button type="submit" name="saveAction"  class="bg-[#111827] text-white px-8 py-2.5 rounded-lg text-sm font-semibold hover:bg-black transition w-full">Guardar en Catálogo</button>
-                        <button type="reset" class="bg-gray-200 text-gray-600 px-8 py-2.5 rounded-lg text-sm font-semibold hover:bg-gray-300 transition w-full">Limpiar</button>
+
+                    <!-- Fila 3: Botones -->
+                    <div class="flex flex-col sm:flex-row gap-4 mt-2">
+                        <button type="submit" name="saveAction" class="flex-1 bg-cyan-600 text-white px-8 py-3 rounded-lg text-sm font-semibold hover:bg-cyan-700 transition shadow-sm cursor-pointer">Guardar en Catálogo</button>
+                        <button type="reset" class="flex-1 bg-gray-200 text-gray-600 px-8 py-3 rounded-lg text-sm font-semibold hover:bg-gray-300 transition cursor-pointer">Limpiar Formulario</button>
                     </div>
                 </div>
             </form>
@@ -155,6 +165,7 @@ include('../controllers/inventoryController.php');
     </main>
 </body>
 <script>
+    
     function editProduct(product) {
         document.querySelector('input[name="id"]').value = product.id;
         document.querySelector('input[name="name"]').value = product.name;
@@ -190,6 +201,33 @@ include('../controllers/inventoryController.php');
             }
         });
     }
+    
+
+    function selectCategory() {
+        const inputCategory = document.querySelector('select[name="category"]');
+        // Usamos la variable $categoryList que definimos en el controlador
+        const categoriesList = <?php echo json_encode($categoryList); ?>;
+        
+        // Limpiamos el select antes de llenar
+        inputCategory.innerHTML = '<option value="" disabled selected>Selecciona una categoría</option>';
+
+        if (Array.isArray(categoriesList)) {
+            categoriesList.forEach(category => {
+                const item = document.createElement('option');
+                item.value = category;
+                item.textContent = category;
+                // Si la categoría coincide con la del producto que estamos editando, la seleccionamos
+                if (category === "<?php echo $category; ?>") {
+                    item.selected = true;
+                }
+                inputCategory.appendChild(item);
+            });
+        }
+    }
+
+    // 5. Llamamos a la función para que se ejecute
+    selectCategory();
+
 
     // When the windows is loaded, we reed if URL has "?status=deleted" from PHP
     window.onload = function() {
@@ -212,4 +250,13 @@ include('../controllers/inventoryController.php');
         }
     };
 </script>
+<script>
+    const API_CONFIG = <?php echo json_encode([
+        "API_URL" => $API_URL,
+        "API_KEY" => $API_KEY,
+        "API_HOST" => $API_HOST,
+        
+    ]); ?>;
+</script>
+<script src="../connection/api.js"></script>
 </html>

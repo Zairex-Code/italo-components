@@ -1,6 +1,11 @@
 <?php
 // We convert dir in an associative array
 $env = parse_ini_file(__DIR__ . '/../.env');
+// API ENV
+$API_URL = $env['API_URL'];
+$API_KEY = $env['API_KEY'];
+$API_HOST = $env['API_HOST'];
+
 
 //foreach($env as $env1){
     //echo $n++; 
@@ -20,4 +25,4 @@ try{
     echo "something wrong :(".$e->getMessage();
 }
 
-
+?>

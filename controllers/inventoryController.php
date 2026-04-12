@@ -1,16 +1,12 @@
 <?php
 include_once('../connection/bd.php');
 
-// we bring env
-$env = parse_ini_file(__DIR__ . '/../.env');
-// API ENV
-$API_URL = $env['API_URL'];
-$API_KEY = $env['API_KEY'];
-$API_HOST = $env['API_HOST'];
+            
 
 class inventoryManager{
     private $pdo;
     private $id;
+    
     private $name;
     private $category;
     private $price;
@@ -23,6 +19,7 @@ class inventoryManager{
     {
         $this->pdo = $pdo;
         $this->id = (isset($_POST['id'])) ? $_POST['id'] : "";
+        
         $this->name = (isset($_POST['name'])) ? $_POST['name'] : "";
         $this->category = (isset($_POST['category'])) ? $_POST['category'] : "";
         $this->price = (isset($_POST['price'])) ? $_POST['price'] : "";
@@ -98,12 +95,27 @@ class inventoryManager{
 
     }
     
+    public function getCategoriesList(){
+       $categoriesList = $this->CategoriesList();
+       return $categoriesList;
+    }
+    
     public function getAllProducts(){
         $productListSQL = $this->pdo->prepare('SELECT * FROM inventory WHERE 1');
         $productListSQL->execute();
         $productListSQL = $productListSQL->fetchAll(PDO::FETCH_ASSOC);
         return $productListSQL;
     }
+    private function CategoriesList(){
+        return [
+            "Electrónica", "Computación", "Hogar y Cocina", "Herramientas", "Deportes", 
+            "Libros", "Juguetes", "Ropa", "Calzado", "Belleza", 
+            "Salud", "Automotriz", "Muebles", "Iluminación", "Jardinería", 
+            "Papelería", "Mascotas", "Videojuegos", "Música", "Fotografía"
+        ];
+    }
+
+    
 };
 
 $controller = new inventoryManager($pdo);
@@ -112,7 +124,7 @@ $controller->handleRequest();
 
 
 $productList = $controller->getAllProducts();
-
+$categoryList = $controller->getCategoriesList();
 
 
 $id = $controller->getId();
