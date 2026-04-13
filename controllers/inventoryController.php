@@ -22,7 +22,7 @@ class inventoryManager{
         $this->name = (isset($_POST['name'])) ? $_POST['name'] : "";
         $this->category = (isset($_POST['category'])) ? $_POST['category'] : "";
         $this->price = (isset($_POST['price'])) ? $_POST['price'] : "";
-        $this->stock = (isset($_POST['stock'])) ? $_POST['stock'] : "";
+        $this->stock = (isset($_POST['stock']) && $_POST['stock'] !== "") ? $_POST['stock'] : 0;
         $this->saveAction = (isset($_POST['saveAction'])) ? $_POST['saveAction'] : NULL;
     }
 
@@ -52,7 +52,6 @@ class inventoryManager{
             }else{
                 $this->updateProduct();
             }
-            // Implementamos patrón PRG (Post/Redirect/Get) para evitar reenvío de formularios
             header("Location: inventory.php?status=saved");
             exit;
         }

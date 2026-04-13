@@ -67,7 +67,7 @@ inputName.addEventListener('input', (e) => {
 			
 			amazonResults.innerHTML = "";
 			
-			// 3. Revisamos el length correctamente
+			
 			if (productsList.length > 0){
 				amazonResults.classList.remove('hidden');
 				productsList.forEach( product => {
@@ -82,7 +82,7 @@ inputName.addEventListener('input', (e) => {
 					const price = product.product_price || product.price || '';
 					const image = product.product_photo || product.image || 'image not found';
 
-					// 4. we inyect the data into the item and we also clean the price to remove any symbol and convert it to a number if it's a string
+					// 4. we inject the data into the item and we also clean the price to remove any symbol and convert it to a number if it's a string
 					item.innerHTML = `
 						<img src="${image}" class="w-10 h-10 object-contain bg-white rounded-md border p-1 shrink-0"> 
 						<div class="flex-grow min-w-0">
@@ -105,7 +105,7 @@ inputName.addEventListener('input', (e) => {
 			} else {
 				amazonResults.classList.add('hidden');
 			}
-		} catch(error) { // 5. corregido "error"
+		} catch(error) { 
 			console.error('Error Amazon Search: ', error);
 		} finally {
 			searchLoader.classList.add('hidden');
