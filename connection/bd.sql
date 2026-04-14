@@ -16,6 +16,7 @@ CREATE TABLE sales (
     inventory_id INT,
     customer_name VARCHAR(100) NOT NULL,
     quantity INT NOT NULL,
+    payment_type VARCHAR(100) NOT NULL;
     sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_inventory_sales 
     FOREIGN KEY (inventory_id) REFERENCES inventory(id)
