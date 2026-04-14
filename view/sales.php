@@ -171,35 +171,38 @@ $categoryListSales = $categoryList;
                             $desc = ($sale['payment_type'] == 'Tarjeta OH') ? ($sub * 0.05) : 0;
                             $total_con_igv = ($sub - $desc) * 1.18;
                         ?>
-                            <tr class="sales-row hover:bg-gray-50/50 transition " >
-                                <td class="px-8 py-4"><?php echo $sale['id']; ?></td>
-                                <td class="px-8 py-4">
-                                    <div class="w-12 h-12 bg-gray-100 rounded-lg overflow-hidden border border-gray-100 flex items-center justify-center">
-                                        <?php if($sale['image']): ?>
-                                            <img src="<?php echo $sale['image']; ?>" class="w-full h-full object-cover" alt="Product">
-                                        <?php else: ?>
-                                            <svg class="w-6 h-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                        <?php endif; ?>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-4">
-                                    <div class="font-bold text-gray-900"><?php echo $sale['product_name']; ?></div>
-                                    <div class="text-[10px] text-gray-400"><?php echo $sale['category']; ?></div>
-                                </td>
-                                <td class="px-8 py-4"><?php echo $sale['customer_name']; ?></td>
-                                <td class="px-8 py-4 text-gray-400"><?php echo $sale['sale_date']; ?></td>
-                                <td class="px-8 py-4">
-                                    <span class="bg-blue-50 text-blue-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-blue-100">
-                                        <?php echo $sale['quantity']; ?> Unid.
-                                    </span>
-                                </td>
-                                <td class="px-8 py-4">
-                                    <span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-orange-100">
-                                        <?php echo $sale['payment_type'] ?>
-                                    </span>
-                                </td>
-                                <td class="px-8 py-4 font-bold text-gray-900">$<?php echo number_format($total_con_igv, 2); ?></td>
-                            </tr>
+                            <tr class="sales-row hover:bg-gray-50/50 transition cursor-pointer" onclick="invoice(<?php echo $sale['id']; ?>)" >
+                                
+
+                                        <td class="px-8 py-4"><?php echo $sale['id']; ?></td>
+                                        <td class="px-8 py-4">
+                                            <div class="w-12 h-12 bg-gray-100 rounded-lg overflow-hidden border border-gray-100 flex items-center justify-center">
+                                                <?php if($sale['image']): ?>
+                                                    <img src="<?php echo $sale['image']; ?>" class="w-full h-full object-cover" alt="Product">
+                                                <?php else: ?>
+                                                    <svg class="w-6 h-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                <?php endif; ?>
+                                            </div>
+                                        </td>
+                                        <td class="px-8 py-4">
+                                            <div class="font-bold text-gray-900"><?php echo $sale['product_name']; ?></div>
+                                            <div class="text-[10px] text-gray-400"><?php echo $sale['category']; ?></div>
+                                        </td>
+                                        <td class="px-8 py-4"><?php echo $sale['customer_name']; ?></td>
+                                        <td class="px-8 py-4 text-gray-400"><?php echo $sale['sale_date']; ?></td>
+                                        <td class="px-8 py-4">
+                                            <span class="bg-blue-50 text-blue-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-blue-100">
+                                                <?php echo $sale['quantity']; ?> Unid.
+                                            </span>
+                                        </td>
+                                        <td class="px-8 py-4">
+                                            <span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-orange-100">
+                                                <?php echo $sale['payment_type'] ?>
+                                            </span>
+                                        </td>
+                                        <td class="px-8 py-4 font-bold text-gray-900">$<?php echo number_format($total_con_igv, 2); ?></td>
+                                    </tr>
+                                
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -255,6 +258,10 @@ $categoryListSales = $categoryList;
         }
     }
     selectCategory();
+
+    function invoice(id){
+        window.location.href = `/view/invoice.php/?invoiceID=${id}`;
+    }
 
 
     function renderProducts(query = "") {

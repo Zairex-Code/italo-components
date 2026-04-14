@@ -1,6 +1,7 @@
 <?php
 include('../controllers/salesController.php');
 include('../controllers/inventoryController.php');
+include('../controllers/invoiceController.php');
 
 $productsInventory = $productList; 
 $categoryListSales = $categoryList;
@@ -54,7 +55,7 @@ $categoryListSales = $categoryList;
                     <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Invoice Paid</span>
                     <div>
                         <p class="text-[9px] font-bold text-gray-400 tracking-widest uppercase mb-1">Reference No.</p>
-                        <p class="text-lg font-mono text-gray-800 font-bold tracking-wide">ICF-2023-8842</p>
+                        <p class="text-lg font-mono text-gray-800 font-bold tracking-wide">ICF-2026-<?php ?></p>
                     </div>
                 </div>
             </div>
@@ -172,4 +173,7 @@ $categoryListSales = $categoryList;
         
     </main>
 </body>
+<script>
+    
+</script>
 </html>
