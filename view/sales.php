@@ -171,7 +171,7 @@ $categoryListSales = $categoryList;
                             $desc = ($sale['payment_type'] == 'Tarjeta OH') ? ($sub * 0.05) : 0;
                             $total_con_igv = ($sub - $desc) * 1.18;
                         ?>
-                            <tr class="hover:bg-gray-50/50 transition">
+                            <tr class="sales-row hover:bg-gray-50/50 transition " >
                                 <td class="px-8 py-4"><?php echo $sale['id']; ?></td>
                                 <td class="px-8 py-4">
                                     <div class="w-12 h-12 bg-gray-100 rounded-lg overflow-hidden border border-gray-100 flex items-center justify-center">
@@ -330,6 +330,31 @@ $categoryListSales = $categoryList;
     document.addEventListener('click', (e) => {
         if (!inputName.contains(e.target) && !nameResults.contains(e.target)) {
             nameResults.classList.add('hidden');
+        }
+    });
+
+    const searchInput = document.getElementById('table-search');
+    searchInput.addEventListener('input', function() {
+        const rows = document.querySelectorAll('.sales-row');
+        const query = this.value.toLowerCase().trim();
+        let counter = 0;
+
+        rows.forEach(row => {
+            const id = row.cells[0].textContent.toLowerCase();
+            const name = row.cells[2].querySelector('div:first-child').textContent.toLowerCase();
+            const category = row.cells[2].querySelector('div:last-child').textContent.toLowerCase();
+
+            if (id.includes(query) || name.includes(query) || category.includes(query)) {
+                row.classList.remove('hidden');
+                counter++;
+            } else {
+                row.classList.add('hidden');
+            }
+            
+        })
+        const countText = document.querySelector('.countText');
+        if (countText) {
+            countText.textContent = `Mostrando ${counter} productos encontrados`;
         }
     });
 
