@@ -55,7 +55,7 @@ $categoryListSales = $categoryList;
                     <span class="inline-block bg-amber-100 text-amber-700 text-[9px] font-bold px-3 py-1 rounded-full tracking-widest uppercase mb-3">Invoice Paid</span>
                     <div>
                         <p class="text-[9px] font-bold text-gray-400 tracking-widest uppercase mb-1">Reference No.</p>
-                        <p class="text-lg font-mono text-gray-800 font-bold tracking-wide">ICF-2026-<?php ?></p>
+                        <p class="text-lg font-mono text-gray-800 font-bold tracking-wide">ICF-2026-<?php echo $invoice['id'];?></p>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@ $categoryListSales = $categoryList;
                 </div>
                 <div>
                     <h4 class="text-[9px] font-bold text-gray-400 tracking-widest uppercase mb-4">Bill To</h4>
-                    <h3 class="text-sm font-bold text-gray-900 mb-1">Vanguard Design Studio</h3>
+                    <h3 class="text-sm font-bold text-gray-900 mb-1"><?php echo $invoice['customer_name']; ?></h3>
                     <p class="text-xs text-gray-500 leading-relaxed mb-3">888 Marble Row, Floor 12<br>New York, NY 10014</p>
                     
                 </div>
@@ -86,12 +86,12 @@ $categoryListSales = $categoryList;
                     <h4 class="text-[9px] font-bold text-gray-400 tracking-widest uppercase mb-4">Dates & Terms</h4>
                     <div class="grid grid-cols-2 gap-y-4 text-xs">
                         <span class="text-gray-400">Invoice Date:</span>
-                        <span class="text-gray-900 font-semibold text-right">Oct 24, 2023</span>
+                        <span class="text-gray-900 font-semibold text-right"><?php echo $invoice['sale_date']; ?></span>
                         
                         
                         
                         <span class="text-gray-400">Payment Method:</span>
-                        <span class="text-gray-900 font-semibold text-right">Wire Transfer</span>
+                        <span class="text-gray-900 font-semibold text-right"><?php echo $invoice['payment_type']; ?></span>
                     </div>
                 </div>
             </div>
@@ -111,20 +111,20 @@ $categoryListSales = $categoryList;
                 </thead>
                 <tbody class="divide-y divide-gray-50 text-xs" >
                     <tr class="gap-4 pb-4 border-b border-gray-100 text-20 font-bold text-gray-400 tracking-widest uppercase text-center" >
-                        <td class="px-4 py-4 align-middle">ID</td>
-                        <td class="px-4 py-4 align-middle">
+                        <td class="px-4 py-4 align-middle"><?php echo $invoice['inventory_id']; ?></td>
+                        <td class="px-4 py-4 align-middle w-20">
                             <div class="w-20 h-20 mx-auto rounded-md bg-gray-100 overflow-hidden shrink-0 border border-gray-200 shadow-sm my-2">
-                                <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&fit=crop&w=150&q=80" alt="Product" class="w-full h-full object-cover">
+                                <img src="<?php echo $invoice['image']; ?>" alt="Product" class="w-full h-full object-cover">
                             </div>
                         </td>
                         
-                        <td class="px-8 py-4">
-                            <div class="font-bold text-gray-900"><?php echo $sale['product_name']; ?></div>
-                            <div class="text-[10px] text-gray-400"><?php echo $sale['category']; ?></div>
+                        <td class="px-8 py-4 w-180">
+                            <div class="font-bold text-gray-900 "><?php echo $invoice['product_name']; ?></div>
+                            <div class="text-[10px] text-gray-400"><?php echo $invoice['category']; ?></div>
                         </td>
-                        <td>5</td>
-                        <td class="text-center">$4.00</td>
-                        <td class="text-right">$20.00</td>
+                        <td><?php echo $invoice['quantity']; ?></td>
+                        <td class="text-center">$<?php echo number_format($invoice['price'], 2); ?></td>
+                        <td class="text-right">$<?php echo number_format($invoice['quantity'] * $invoice['price'], 2); ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -135,19 +135,19 @@ $categoryListSales = $categoryList;
                 <div class="w-80">
                     <div class="flex justify-between py-2 text-xs">
                         <span class="text-gray-500">Subtotal:</span>
-                        <span class="text-gray-900">$5,580.00</span>
+                        <span class="text-gray-900">$<?php echo number_format($subtotal, 2); ?></span>
                     </div>
                     <div class="flex justify-between py-2 text-xs">
-                        <span class="text-gray-500">Tax (8.5%):</span>
-                        <span class="text-gray-900">$474.30</span>
+                        <span class="text-gray-500">IGV (18%):</span>
+                        <span class="text-gray-900">$<?php echo number_format($igv, 2); ?></span>
                     </div>
                     <div class="flex justify-between py-2 text-xs">
-                        <span class="text-gray-500">Shipping:</span>
-                        <span class="text-gray-900">$125.00</span>
+                        <span class="text-gray-500">Descuento (tarjeta OH 5%): </span>
+                        <span class="text-gray-900">$<?php echo $discount; ?></span>
                     </div>
                     <div class="flex justify-between py-5 mt-4 border-t border-gray-100">
-                        <span class="text-sm font-bold text-gray-900 self-center">Total Amount:</span>
-                        <span class="text-2xl font-serif text-teal-800 font-bold">$6,179.30</span>
+                        <span class="text-sm font-bold text-gray-900 self-center">Monto Total:</span>
+                        <span class="text-2xl font-serif text-teal-800 font-bold">$<?php echo $total; ?></span>
                     </div>
                 </div>
             </div>
