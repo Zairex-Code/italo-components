@@ -154,14 +154,14 @@ $categoryListSales = $categoryList;
                 <table class="w-full text-left">
                     <thead>
                         <tr class="border-b border-gray-50 uppercase text-[10px] font-bold text-gray-400 tracking-widest">
-                            <th class="px-8 py-5">ID</th>
-                            <th class="px-8 py-5">Imagen</th>
-                            <th class="px-8 py-5">Producto</th>
-                            <th class="px-8 py-5">Cliente</th>
-                            <th class="px-8 py-5">fecha de venta</th>
-                            <th class="px-8 py-5">Cantidad</th>
-                            <th class="px-8 py-5">Pago</th>
-                            <th class="px-8 py-5">Total</th>
+                            <th class="px-4 py-5">ID</th>
+                            <th class="px-4 py-5">Imagen</th>
+                            <th class="px-4 py-5">Producto</th>
+                            <th class="px-4 py-5">Cliente</th>
+                            <th class="px-4 py-5">fecha de venta</th>
+                            <th class="px-4 py-5">Cantidad</th>
+                            <th class="px-4 py-5">Pago</th>
+                            <th class="px-4 py-5">Total</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-50 text-xs">
@@ -174,8 +174,8 @@ $categoryListSales = $categoryList;
                             <tr class="sales-row hover:bg-gray-50/50 transition cursor-pointer" onclick="invoice(<?php echo $sale['id']; ?>)" >
                                 
 
-                                        <td class="px-8 py-4"><?php echo $sale['id']; ?></td>
-                                        <td class="px-8 py-4">
+                                        <td class="px-4 py-4"><?php echo $sale['id']; ?></td>
+                                        <td class="px-4 py-4">
                                             <div class="w-12 h-12 bg-gray-100 rounded-lg overflow-hidden border border-gray-100 flex items-center justify-center">
                                                 <?php if($sale['image']): ?>
                                                     <img src="<?php echo $sale['image']; ?>" class="w-full h-full object-cover" alt="Product">
@@ -184,23 +184,23 @@ $categoryListSales = $categoryList;
                                                 <?php endif; ?>
                                             </div>
                                         </td>
-                                        <td class="px-8 py-4">
-                                            <div class="font-bold text-gray-900"><?php echo $sale['product_name']; ?></div>
+                                        <td class="px-4 py-4 w-180">
+                                            <div class="font-bold text-gray-900" ><?php echo $sale['product_name']; ?></div>
                                             <div class="text-[10px] text-gray-400"><?php echo $sale['category']; ?></div>
                                         </td>
-                                        <td class="px-8 py-4"><?php echo $sale['customer_name']; ?></td>
-                                        <td class="px-8 py-4 text-gray-400"><?php echo $sale['sale_date']; ?></td>
-                                        <td class="px-8 py-4">
+                                        <td class="px-4 py-4"><?php echo $sale['customer_name']; ?></td>
+                                        <td class="px-4 py-4 text-gray-400"><?php echo $sale['sale_date']; ?></td>
+                                        <td class="px-4 py-4">
                                             <span class="bg-blue-50 text-blue-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-blue-100">
                                                 <?php echo $sale['quantity']; ?> Unid.
                                             </span>
                                         </td>
-                                        <td class="px-8 py-4">
+                                        <td class="px-4 py-4">
                                             <span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-orange-100">
                                                 <?php echo $sale['payment_type'] ?>
                                             </span>
                                         </td>
-                                        <td class="px-8 py-4 font-bold text-gray-900">$<?php echo number_format($total_con_igv, 2); ?></td>
+                                        <td class="px-4 py-4 font-bold text-gray-900">$<?php echo number_format($total_con_igv, 2); ?></td>
                                     </tr>
                                 
                         <?php endforeach; ?>

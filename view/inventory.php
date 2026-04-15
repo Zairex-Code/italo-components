@@ -133,7 +133,7 @@ include('../controllers/inventoryController.php');
                                     <div class="text-[10px] text-gray-400"><?php echo $product['category'] ?></div>
                                 </td>
                                 <td class="px-8 py-4"><span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-3 py-1.5 rounded-full border border-orange-100"><?php echo $product['stock'] ?> Unid.</span></td>
-                                <td class="px-8 py-4 font-bold"><?php echo $product['price'] ?></td>
+                                <td class="px-8 py-4 font-bold">$<?php echo $product['price'] ?></td>
                                 <td class="px-8 py-4">
                                     <div class="flex justify-end gap-3 text-gray-300">
                                         <button class="hover:text-cyan-500 cursor-pointer" onclick="editProduct(<?php echo htmlspecialchars(json_encode($product)); ?>)">

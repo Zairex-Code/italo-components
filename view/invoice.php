@@ -3,8 +3,6 @@ include('../controllers/salesController.php');
 include('../controllers/inventoryController.php');
 include('../controllers/invoiceController.php');
 
-$productsInventory = $productList; 
-$categoryListSales = $categoryList;
 ?>
 <!DOCTYPE html>
 <html lang="en">

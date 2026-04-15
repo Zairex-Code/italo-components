@@ -15,9 +15,6 @@ class invoiceManager{
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
-
-       
-
     }
     //getters 
     public function getIGV($subtotal){
@@ -39,15 +36,15 @@ class invoiceManager{
         return $subtotal + $igv - $discount;
     }
     public function handleRequest(){
-        // Cambiamos a 'invoiceID' para que sea igual a tu URL
+        
         if(isset($_GET['invoiceID'])){
             return $this->getInvoice($_GET['invoiceID']);
         }
         return null;
     }
- 
+
     public function getInvoice($invoice_id){
-        // Si no hay ID, devolvemos un array vacío para evitar errores
+        
         if(!$invoice_id) return [];
         return $this->invoiceDetails($invoice_id);
     }
@@ -72,11 +69,11 @@ class invoiceManager{
 
 $invoiceManager = new invoiceManager($pdo);
 
-// Usamos 'invoiceID' que es lo que llega por la URL
+// we used 'invoiceID' that is what we received from URL
 $invoiceId = isset($_GET['invoiceID']) ? $_GET['invoiceID'] : null;
 $getInvoice = $invoiceManager->getInvoice($invoiceId);
 
-// Inicializamos variables en 0
+// we initialize with 0
 $invoice = null;
 $subtotal = 0;
 $discount = 0;
@@ -84,7 +81,7 @@ $igv = 0;
 $total = 0;
 
 if (!empty($getInvoice)) {
-    //
+    // how getInvoice only have one array we used it 
     $invoice = $getInvoice[0];
     
     $subtotal = $invoiceManager->getSubtotal($invoice['price'], $invoice['quantity']);
