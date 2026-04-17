@@ -12,6 +12,22 @@ include('../controllers/invoiceController.php');
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        @media print {
+            aside, .flex.justify-between.items-end.mb-8 {
+                display: none !important;
+            }
+            main {
+                padding: 0 !important;
+                background-color: white !important;
+            }
+            .bg-white {
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+            }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans flex h-screen overflow-hidden">
     <?php include('components/sidebar.php'); ?>
@@ -25,11 +41,11 @@ include('../controllers/invoiceController.php');
                 <h1 class="text-4xl font-serif text-gray-900 tracking-tight">Invoice Details</h1>
             </div>
             <div class="flex gap-3">
-                <button class="px-5 py-2.5 bg-white border border-gray-200 text-gray-700 font-semibold rounded-lg text-sm flex items-center gap-2 hover:bg-gray-50 transition shadow-sm">
+                <button onclick="window.print()" class="px-5 py-2.5 bg-white border border-gray-200 text-gray-700 font-semibold rounded-lg text-sm flex items-center gap-2 hover:bg-gray-50 transition shadow-sm cursor-pointer">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                     Download PDF
                 </button>
-                <button class="px-5 py-2.5 bg-cyan-500 text-white font-semibold rounded-lg text-sm flex items-center gap-2 shadow-md shadow-cyan-500/30 hover:bg-cyan-600 transition">
+                <button onclick="window.print()" class="px-5 py-2.5 bg-cyan-500 text-white font-semibold rounded-lg text-sm flex items-center gap-2 shadow-md shadow-cyan-500/30 hover:bg-cyan-600 transition cursor-pointer">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
                     Print Invoice
                 </button>

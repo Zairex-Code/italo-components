@@ -66,8 +66,8 @@ include('../controllers/dashboardController.php');
                         <div class="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-100 group-hover:border-cyan-200 transition-colors">
                             <img src="<?php echo $sale['image'] ?>" alt="">
                         </div>
-                        <div class="flex flex-col w-150">
-                            <span class="font-bold text-gray-900 text-sm"><?php echo $sale['product_name'] ?></span>
+                        <div class="flex flex-col w-200">
+                            <span class="font-bold text-gray-850 text-sm"><?php echo $sale['product_name'] ?></span>
                             <span class="text-xs text-gray-400 uppercase tracking-widest font-medium"><?php echo $sale['category'] ?></span>
                         </div>
                     </div>

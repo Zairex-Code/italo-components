@@ -31,7 +31,8 @@ To provide accurate and rich catalog data, the system integrates with the **Amaz
 - 🚨 **Dynamic Low-Stock Dropdown:** An intuitive user interface element that allows instant stock monitoring without leaving the main dashboard.
 - 🛒 **Amazon API Integration:** Real-time product synchronization and catalog management powered by the Amazon Product Advertising API.
 - 🧾 **Pro Invoice System:** Clear, detailed document generation with automated tax (IGV) and discount calculation.
-- 📊 **Smart Data Analytics:** Advanced SQL ranking of "Top Sales" to help businesses identify their best-performing products instantly.
+- �️ **Print-Ready Invoices:** Native browser printing support with optimized `@media print` styles for clean, professional PDF generation and physical printing.
+- �📊 **Smart Data Analytics:** Advanced SQL ranking of "Top Sales" to help businesses identify their best-performing products instantly.
 
 ---
 
