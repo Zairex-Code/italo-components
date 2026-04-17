@@ -59,42 +59,26 @@ include('../controllers/dashboardController.php');
             
             <!-- Summary Table List -->
             <div class="space-y-6">
+              <?php foreach($topSales as $sale){
+                ?>
+                <div class="flex items-center justify-between group cursor-pointer">
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-100 group-hover:border-cyan-200 transition-colors">
+                            <img src="<?php echo $sale['image'] ?>" alt="">
+                        </div>
+                        <div class="flex flex-col w-150">
+                            <span class="font-bold text-gray-900 text-sm"><?php echo $sale['product_name'] ?></span>
+                            <span class="text-xs text-gray-400 uppercase tracking-widest font-medium"><?php echo $sale['category'] ?></span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-serif text-gray-900">$<?php echo number_format($sale['total_units_sold'] * $sale['price'], 2); ?></div>
+                        <div class="text-[10px] font-bold text-emerald-500 uppercase tracking-wider"><?php echo $sale['total_units_sold'] ?> unidades vendidas.</div>
+                    </div>
+                </div>
+                <?php 
+              }; ?>
                 <!-- Item 1 -->
-                <div class="flex items-center justify-between group cursor-pointer">
-                    <div class="flex items-center gap-6">
-                        <div class="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-100 group-hover:border-cyan-200 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="font-bold text-gray-900 text-sm">Nombre del Componente</span>
-                            <span class="text-xs text-gray-400 uppercase tracking-widest font-medium">Categoría Premium</span>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <div class="font-serif text-gray-900">$</div>
-                        <div class="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">12 unidades vendidas</div>
-                    </div>
-                </div>
-
-                <!-- Divider -->
-                <div class="h-px bg-gray-50"></div>
-
-                <!-- Item 2 -->
-                <div class="flex items-center justify-between group cursor-pointer">
-                    <div class="flex items-center gap-6">
-                        <div class="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-100 group-hover:border-cyan-200 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="font-bold text-gray-900 text-sm">Controlador Interactivo</span>
-                            <span class="text-xs text-gray-400 uppercase tracking-widest font-medium">Backend Sync</span>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <div class="font-serif text-gray-900">$850.00</div>
-                        <div class="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">9 unidades vendidas</div>
-                    </div>
-                </div>
             </div>
         </div>
 

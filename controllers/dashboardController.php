@@ -70,11 +70,18 @@ class stats{
     }
 
     private function topSales(){
-        $sql = "SELECT i.id as product_id, i.name as product_name, i.category, i.price, i.image, i.stock, COUNT(s.id) as total_sales
-                FROM sales s
-                JOIN inventory i ON s.inventory_id = i.id
-                GROUP BY i.id, i.name, i.category, i.price, i.image, i.stock
-                ORDER BY total_sales DESC";
+        $sql = "SELECT 
+                i.id as product_id, 
+                i.name as product_name, 
+                i.category, 
+                i.price, 
+                i.image, 
+                i.stock, 
+                SUM(s.quantity) as total_units_sold
+            FROM sales s
+            JOIN inventory i ON s.inventory_id = i.id
+            GROUP BY i.id, i.name, i.category, i.price, i.image, i.stock
+            ORDER BY total_units_sold DESC";
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
     }

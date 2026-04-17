@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 <aside class="w-20 bg-white border-r border-gray-100 flex flex-col items-center py-8 gap-10 h-screen">
-    <div class="p-3 bg-gray-900 text-cyan-600 rounded-xl font-serif text-xl">
+    <div class="p-3 bg-cyan-500 text-cyan-white  shadow shadow-xl rounded-xl font-serif text-xl w-12 h-12 flex items-center justify-center">
         <a href="">
             IC
             
