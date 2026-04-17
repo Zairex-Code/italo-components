@@ -18,7 +18,14 @@ class inventoryManager{
     {
         $this->pdo = $pdo;
         $this->id = (isset($_POST['id'])) ? $_POST['id'] : "";
-        $this->image = (isset($_POST['image'])) ? $_POST['image'] : "";
+        
+        // Handle image: If new image is provided, use it. Otherwise, look for existing hidden input
+        if (isset($_POST['image']) && $_POST['image'] !== "") {
+            $this->image = $_POST['image'];
+        } else {
+            $this->image = (isset($_POST['current_image'])) ? $_POST['current_image'] : "";
+        }
+
         $this->name = (isset($_POST['name'])) ? $_POST['name'] : "";
         $this->category = (isset($_POST['category'])) ? $_POST['category'] : "";
         $this->price = (isset($_POST['price'])) ? $_POST['price'] : "";

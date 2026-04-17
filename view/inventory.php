@@ -164,6 +164,7 @@ include('../controllers/inventoryController.php');
         document.querySelector('input[name="id"]').value = product.id;
         document.querySelector('input[name="name"]').value = product.name;
         document.getElementById('image').src = product.image;
+        document.getElementById('input-image').value = product.image; // Asegurar que el input hidden tenga la URL actual
         document.querySelector('select[name="category"]').value = product.category;
         document.querySelector('input[name="price"]').value = product.price;
         document.querySelector('input[name="stock"]').value = product.stock;
