@@ -46,7 +46,8 @@ To provide accurate and rich catalog data, the system integrates with the **Amaz
 <img width="746" height="360" alt="Screencast from 2026-04-16 21-13-10" src="https://github.com/user-attachments/assets/401a0b53-99d8-4980-b8af-28bc2003fcdd" />
 
 ## ✨ Invoice View
-<img width="746" height="360" alt="Screencast from 2026-04-16 21-16-40" src="https://github.com/user-attachments/assets/8a9446f9-f6e4-48c0-bd20-95d8012e7ddc" />
+<img width="722" height="372" alt="Screencast from 2026-04-16 21-59-37" src="https://github.com/user-attachments/assets/6da20536-d060-468e-8940-9f3b8bdff22e" />
+
 
 
 
