@@ -116,11 +116,7 @@ Follow these steps to run the project locally on your machine.
 
 ---
 
-## 📸 Screenshots
 
-*(You can add screenshots of your modern dashboard and the invoice design here by placing the images in an `assets/` folder and linking them like this: `![Dashboard](assets/dashboard.png)`)*
-
----
 
 ## 👨‍💻 Author
 
