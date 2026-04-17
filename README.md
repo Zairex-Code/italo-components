@@ -35,6 +35,23 @@ To provide accurate and rich catalog data, the system integrates with the **Amaz
 
 ---
 
+## ✨ Dasboard View
+<img width="746" height="360" alt="Screencast from 2026-04-16 21-24-57" src="https://github.com/user-attachments/assets/50a18c3c-b156-474e-bff5-c48507db6b01" />
+
+## ✨ Inventory View
+<img width="746" height="360" alt="Screencast from 2026-04-16 21-02-28" src="https://github.com/user-attachments/assets/4e9d3dba-7107-4aa2-bf92-f1e85a6dfae9" />
+
+## ✨ Sales manager View
+<img width="746" height="360" alt="Screencast from 2026-04-16 21-13-10" src="https://github.com/user-attachments/assets/401a0b53-99d8-4980-b8af-28bc2003fcdd" />
+
+## ✨ Invoice View
+<img width="746" height="360" alt="Screencast from 2026-04-16 21-16-40" src="https://github.com/user-attachments/assets/8a9446f9-f6e4-48c0-bd20-95d8012e7ddc" />
+
+
+
+
+
+
 ## 🛠️ Technology Stack
 
 - **Backend:** PHP 8+ (Vanilla, Object-Oriented Controllers)
