@@ -19,7 +19,7 @@ include('../controllers/dashboardController.php');
     <main class="flex-1 p-8 overflow-y-auto bg-gray-50/50">
       <div class="my-10">
           <h1 class="text-[60px] font-serif text-gray-900 tracking-tight ">Italo Components</h1>
-          <p class="text-[10px] font-bold text-gray-400 tracking-widest uppercase">Premium Software Components</p>
+          <p class="text-[10px] font-bold text-gray-400 tracking-widest uppercase">Premium Software Components.</p>
       </div>
         <!-- Breadcrumbs & Header -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
